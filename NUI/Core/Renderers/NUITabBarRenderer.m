@@ -20,6 +20,10 @@
         [bar setTintColor:[NUISettings getColor:@"background-tint-color" withClass:className]];
     }
     
+    if ([NUISettings hasProperty:@"bar-tint-color" withClass:className]) {
+            [bar setBarTintColor:[NUISettings getColor:@"bar-tint-color" withClass:className]];
+    }
+                        
     if ([NUISettings hasProperty:@"selected-image" withClass:className]) {
         [bar setSelectionIndicatorImage:[NUISettings getImage:@"selected-image" withClass:className]];
     }

@@ -27,7 +27,11 @@ static NUISettings *instance = nil;
 {
     instance = [self getInstance];
     instance.stylesheetName = name;
+#ifndef AF_APP_EXTENSIONS
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+#else
+    UIInterfaceOrientation orientation = UIInterfaceOrientationPortrait;
+#endif
     instance.stylesheetOrientation = [self stylesheetOrientationFromInterfaceOrientation:orientation];
     NUIStyleParser *parser = [[NUIStyleParser alloc] init];
     instance.styles = [parser getStylesFromFile:name];

@@ -264,10 +264,12 @@ static NUIRenderer *gInstance = nil;
 
 + (void)rerender
 {
+#ifndef AF_APP_EXTENSIONS
     for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
         UIView *rootView = [[window rootViewController] view];
         [self rerenderView:rootView];
     }
+#endif
 }
 
 + (void)rerenderView:(UIView *)view
@@ -324,8 +326,12 @@ static NUIRenderer *gInstance = nil;
 
 + (void)orientationDidChange:(NSNotification *)notification
 {
+#ifndef AF_APP_EXTENSIONS
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-
+#else
+    UIInterfaceOrientation orientation = UIInterfaceOrientationPortrait;
+#endif
+    
     BOOL didReload = [NUISettings reloadStylesheetsOnOrientationChange:orientation];
 
     if (didReload)
